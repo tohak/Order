@@ -16,8 +16,10 @@ public class DbProperties {
 
         try {
             pr.load(stream);
+            System.out.println("Load Stream OK");
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("Dont load Stream");
         }
         this.url= pr.getProperty("db.url");
         this.user=pr.getProperty("db.user");
