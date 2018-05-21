@@ -31,6 +31,11 @@ public class UtilService {
             ordersService.add(idClient, idGoods[i]);
         }
         clientsService.update(idClient);
+    }
+    public void getInvoice(int id){
+        ClientsService clientsService=new ClientsService();
+        System.out.println(clientsService.getById(id));
+
 
     }
 }

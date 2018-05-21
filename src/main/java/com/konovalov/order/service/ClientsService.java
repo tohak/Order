@@ -102,14 +102,14 @@ public class ClientsService extends DBUtil implements CliensDAO {
     }
     public int getSumClient(int idClients) {
         int sum = 0;
-        String sql = "SELECT price FROM goods WHERE idgoods=" +
-                "(SELECT idgoods FROM orders WHERE idclient=(SELECT idclients FROM clients WHERE idclients=?))";
+        String sql = "SELECT SUM(price) AS `totalPrice` FROM goods WHERE idgoods= ANY (SELECT idgoods FROM orders WHERE idclient=?)";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, idClients);
             ResultSet resultSet = ps.executeQuery();
 
             while (resultSet.next()) {
-                sum += (resultSet.getInt("price"));
+                sum = (resultSet.getInt("totalPrice"));
+                System.out.println(sum);
             }
         } catch (SQLException e) {
             e.printStackTrace();
